@@ -1,13 +1,13 @@
 import sys
 from typing import Dict, Tuple
 import os
-import pandas as pd
+import pandas as pd # type: ignore
 import pickle
-import yaml
-import boto3
+import yaml # type: ignore
+import boto3 # type: ignore
 
 
-from src.constant import *
+from src.constant import * # type: ignore
 from src.exception import CustomException
 from src.logger import logging
 
