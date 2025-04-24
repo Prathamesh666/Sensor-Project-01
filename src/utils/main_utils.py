@@ -19,10 +19,10 @@ class MainUtils:
         pass
 
 
-    def read_yaml_file(self, filename: str) -> dict:
+    def read_yaml_file(self, model: str) -> dict:
         try:
-            with open(filename, "rb") as yaml_file:
-                return yaml.safe_load(yaml_file)
+            with open(model, "rb") as yaml_file: # type: ignore
+                return yaml.safe_load(yaml_file) # type: ignore
 
 
         except Exception as e:
@@ -41,7 +41,7 @@ class MainUtils:
             raise CustomException(e, sys) from e
 
 
-   
+
 
 
     @staticmethod
@@ -61,7 +61,7 @@ class MainUtils:
             raise CustomException(e, sys) from e
 
 
-   
+
 
 
     @staticmethod
@@ -82,7 +82,7 @@ class MainUtils:
 
         except Exception as e:
             raise CustomException(e, sys) from e
-   
+
     @staticmethod    
     def load_object(file_path):
         try:
@@ -91,4 +91,3 @@ class MainUtils:
         except Exception as e:
             logging.info('Exception Occured in load_object function utils')
             raise CustomException(e,sys)
-   
