@@ -3,7 +3,7 @@ from typing import Dict, Tuple
 import os
 import pandas as pd # type: ignore
 import pickle
-import yaml # type: ignore
+from config.model import * # type: ignore
 import boto3 # type: ignore
 
 
