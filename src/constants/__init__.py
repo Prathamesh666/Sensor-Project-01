@@ -9,7 +9,6 @@ MONGO_COLLECTION_NAME = "waferfault"
 TARGET_COLUMN = "quality"
 MONGO_DB_URL="mongodb+srv://PrathameshBhurke:Prathameshbhurke666@cluster0.ozajm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-
 MODEL_FILE_NAME = "model"
 MODEL_FILE_EXTENSION = ".pkl"
 
