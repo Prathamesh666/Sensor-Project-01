@@ -19,7 +19,7 @@ class PredictionPipelineConfig:
     prediction_file_path: str = os.path.join(prediction_output_dir_name, prediction_file_name)
 
 class PredictionPipeline:
-    def __init__(self, request: request):
+    def __init__(self, request: request): # type: ignore
         self.request = request
         self.utils = MainUtils()
         self.prediction_pipeline_config = PredictionPipelineConfig()
