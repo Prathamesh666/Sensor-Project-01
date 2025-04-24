@@ -1,13 +1,13 @@
 import sys
 from typing import Dict, Tuple
 import os
-import pandas as pd # type: ignore
+import pandas as pd
 import pickle
-from config.model import * # type: ignore
+import yaml
 import boto3 # type: ignore
 
 
-from src.constant import * # type: ignore
+from src.constants import *
 from src.exception import CustomException
 from src.logger import logging
 
@@ -19,10 +19,10 @@ class MainUtils:
         pass
 
 
-    def read_yaml_file(self, model: str) -> dict:
+    def read_yaml_file(self, filename: str) -> dict:
         try:
-            with open(model, "rb") as yaml_file: # type: ignore
-                return yaml.safe_load(yaml_file) # type: ignore
+            with open(filename, "rb") as yaml_file:
+                return yaml.safe_load(yaml_file)
 
 
         except Exception as e:
