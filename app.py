@@ -33,7 +33,7 @@ def train_route():
 
 
 @app.route('/predict', methods=['POST', 'GET'])
-def upload():
+def upload():  # sourcery skip: remove-unnecessary-else, swap-if-else-branches
    
     try:
 
