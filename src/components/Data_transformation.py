@@ -2,10 +2,10 @@ import sys
 import os
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split # type: ignore
-from sklearn.impute import SimpleImputer # type: ignore
-from sklearn.preprocessing import RobustScaler, FunctionTransformer # type: ignore
-from sklearn.pipeline import Pipeline # type: ignore
+from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import RobustScaler, FunctionTransformer
+from sklearn.pipeline import Pipeline 
 from sklearn.preprocessing import StandardScaler
 
 from src.constants import *
@@ -39,6 +39,7 @@ class DataTransformation:
             raise CustomException(e, sys)
 
     def get_data_transformer_object(self):
+        # sourcery skip: inline-immediately-returned-variable
 
         try:
             imputer_step = ('imputer', SimpleImputer(strategy='constant', fill_value=0))
