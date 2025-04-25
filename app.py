@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file # type: ignore
+from flask import Flask, render_template, jsonify, request, send_file
 from src.exception import CustomException
 from src.logger import logging as lg
 import os,sys
@@ -29,12 +29,12 @@ def train_route():
 
 
     except Exception as e:
-        raise CustomException(e,sys)
+        raise CustomException(e, sys) from e
 
 
 @app.route('/predict', methods=['POST', 'GET'])
 def upload():  # sourcery skip: remove-unnecessary-else, swap-if-else-branches
-   
+
     try:
 
 
@@ -43,7 +43,7 @@ def upload():  # sourcery skip: remove-unnecessary-else, swap-if-else-branches
         if request.method == 'POST':
             # it is a object of prediction pipeline
             prediction_pipeline = PredictionPipeline(request)
-           
+
             #now we are running this run pipeline method
             prediction_file_detail = prediction_pipeline.run_pipeline()
 
@@ -59,8 +59,8 @@ def upload():  # sourcery skip: remove-unnecessary-else, swap-if-else-branches
         else:
             return render_template('upload_file.html')
     except Exception as e:
-        raise CustomException(e,sys)
-   
+        raise CustomException(e, sys) from e
+
 
 
 
