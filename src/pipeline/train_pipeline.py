@@ -2,7 +2,7 @@ import sys
 import os
 
 from src.components.Data_ingestion import DataIngestion
-from src.components.Data_transformation import DataTransformation # type: ignore
+from src.components.Data_transformation import DataTransformation
 from src.components.model_trainer import ModelTrainer
 from src.exception import CustomException
 
@@ -10,6 +10,7 @@ from src.exception import CustomException
 class TrainingPipeline:
 
     def start_data_ingestion(self):
+        # sourcery skip: inline-immediately-returned-variable
         try:
             data_ingestion = DataIngestion()
             feature_store_file_path = data_ingestion.initiate_data_ingestion()
@@ -26,6 +27,7 @@ class TrainingPipeline:
             raise CustomException(e, sys)
         
     def start_model_training(self, train_array, test_array):
+        # sourcery skip: inline-immediately-returned-variable
         try:
             model_trainer = ModelTrainer()
             model_score = model_trainer.initiate_model_trainer(train_array, test_array)

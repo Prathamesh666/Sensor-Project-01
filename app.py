@@ -1,4 +1,4 @@
-from flask import Flask, render_template, jsonify, request, send_file # type: ignore
+from flask import Flask, render_template, jsonify, request, send_file
 from src.exception import CustomException
 from src.logger import logging as lg
 import os,sys
@@ -33,7 +33,7 @@ def train_route():
 
 
 @app.route('/predict', methods=['POST', 'GET'])
-def upload():
+def upload():  # sourcery skip: remove-unnecessary-else, swap-if-else-branches
    
     try:
 
