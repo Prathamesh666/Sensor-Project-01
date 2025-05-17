@@ -5,7 +5,7 @@ import pandas as pd
 import pickle
 import src.logger as logging
 import src.exception as CustomException
-from flask import request # type: ignore
+from flask import request
 from src.constants import *
 from src.utils.main_utils import MainUtils
 from dataclasses import dataclass
@@ -19,7 +19,7 @@ class PredictionPipelineConfig:
     prediction_file_path: str = os.path.join(prediction_output_dir_name, prediction_file_name)
 
 class PredictionPipeline:
-    def __init__(self, request: request):
+    def __init__(self, request: request): # type: ignore
         self.request = request
         self.utils = MainUtils()
         self.prediction_pipeline_config = PredictionPipelineConfig()
@@ -36,7 +36,7 @@ class PredictionPipeline:
 
             return pred_file_path
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def predict(self, features):
         try:
@@ -45,11 +45,9 @@ class PredictionPipeline:
 
             transformed_x = preprocessor.transform(features)
 
-            preds = model.predict(transformed_x)
-
-            return preds
+            return model.predict(transformed_x)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def get_predicted_dataframe(self, input_dataframe_path: pd.DataFrame):
         try:
@@ -60,7 +58,7 @@ class PredictionPipeline:
 
             predictions = self.predict(input_dataframe)
 
-            input_dataframe[prediction_column_name] = [pred for pred in predictions]
+            input_dataframe[prediction_column_name] = list(predictions)
 
             target_column_mapping = {0:'bad', 1:'good'}
 
@@ -73,7 +71,7 @@ class PredictionPipeline:
             logging.info(f"Predictions Completed")
 
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def run_pipeline(self):
         try:
@@ -82,4 +80,4 @@ class PredictionPipeline:
 
             return self.prediction_pipeline_config
         except Exception as e:
-            raise CustomException(e, sys)        
+            raise CustomException(e, sys) from e      

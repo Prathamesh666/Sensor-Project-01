@@ -35,7 +35,7 @@ class DataIngestion:
 
             return df
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def export_data_into_feature_store_file_path(self) -> pd.DataFrame:
 
@@ -49,7 +49,7 @@ class DataIngestion:
                 collection_name = MONGO_COLLECTION_NAME, 
                 db_name = MONGO_DATABASE_NAME
                 )
-            
+
             logging.info(f"Storing exported data into feature store file path: {raw_file_path}")
 
             feature_store_file_path = os.path.join(raw_file_path, 'wafer_fault.csv')
@@ -57,9 +57,9 @@ class DataIngestion:
             sensor_data.to_csv(feature_store_file_path, index=False)
 
             return feature_store_file_path
-        
+
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def initiate_data_ingestion(self) -> Path:
 

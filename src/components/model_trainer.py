@@ -1,15 +1,16 @@
+from cmath import e
 import sys
 from typing import Generator, List, Tuple
 import os
 import pandas as pd
 import numpy as np
-from sklearn.metrics import accuracy_score # type: ignore
+from sklearn.metrics import accuracy_score
 
 
-from xgboost import XGBClassifier # type: ignore
-from sklearn.svm import SVC # type: ignore
-from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier # type: ignore
-from sklearn.model_selection import GridSearchCV, train_test_split # type: ignore
+from xgboost import XGBClassifier
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+from sklearn.model_selection import GridSearchCV, train_test_split
 from src.constants import *
 from src.exception import CustomException
 from src.logger import logging
@@ -89,7 +90,7 @@ class ModelTrainer:
             
 
         except Exception as error:
-            raise CustomException(e, sys) # type: ignore
+            raise CustomException(e, sys)
         
 
 
@@ -146,6 +147,8 @@ class ModelTrainer:
                             x_train,
                             y_train,
                             ) -> object:
+        # sourcery skip: inline-immediately-returned-variable
+        # sourcery skip: inline-immediately-returned-variable
         
         try:
 
@@ -186,6 +189,7 @@ class ModelTrainer:
 
 
     def initiate_model_trainer(self, train_array, test_array):
+        # sourcery skip: remove-redundant-fstring
         try:
             logging.info(f"Splitting training and testing input and target feature")
 
@@ -256,6 +260,7 @@ class ModelTrainer:
 
 
             if best_model_score < 0.5:
+# sourcery skip: raise-specific-error
                 raise Exception("No Best Model Found with an accuracy grater than the threshold 0.5")
             
             logging.info(f"Best Model Found on Both training and testing data")

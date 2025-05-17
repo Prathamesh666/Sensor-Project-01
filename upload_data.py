@@ -14,8 +14,6 @@ collection_name = "waferfault"
 
 df = pd.read_csv("C:\Users\Hp\Downloads\Module 36\Sensor_Project\notebooks\wafer_23012020_041211.csv")
 
-df = df.drop("Unnamed: 0",axis=1)
-
 json_records = list(json.loads(df.T.to_json()).values())
 
 client[database_name][collection_name].insert_many(json_records)

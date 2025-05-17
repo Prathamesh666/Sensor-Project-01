@@ -1,13 +1,13 @@
 import sys
 from typing import Dict, Tuple
 import os
-import pandas as pd # type: ignore
+import pandas as pd
 import pickle
-import yaml # type: ignore
-import boto3 # type: ignore
+import yaml
+import boto3
 
 
-from src.constant import * # type: ignore
+from src.constants import *
 from src.exception import CustomException
 from src.logger import logging
 
@@ -31,17 +31,12 @@ class MainUtils:
 
     def read_schema_config_file(self) -> dict:
         try:
-            schema_config = self.read_yaml_file(os.path.join("config", "schema.yaml"))
-
-
-            return schema_config
-
-
+            return self.read_yaml_file(os.path.join("config", "schema.yaml"))
         except Exception as e:
             raise CustomException(e, sys) from e
 
 
-   
+
 
 
     @staticmethod
@@ -61,7 +56,7 @@ class MainUtils:
             raise CustomException(e, sys) from e
 
 
-   
+
 
 
     @staticmethod
@@ -82,7 +77,7 @@ class MainUtils:
 
         except Exception as e:
             raise CustomException(e, sys) from e
-   
+
     @staticmethod    
     def load_object(file_path):
         try:
@@ -91,4 +86,3 @@ class MainUtils:
         except Exception as e:
             logging.info('Exception Occured in load_object function utils')
             raise CustomException(e,sys)
-   

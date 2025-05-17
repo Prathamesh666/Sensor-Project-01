@@ -2,10 +2,10 @@ import sys
 import os
 import numpy as np
 import pandas as pd
-from sklearn.model_selection import train_test_split # type: ignore
-from sklearn.impute import SimpleImputer # type: ignore
-from sklearn.preprocessing import RobustScaler, FunctionTransformer # type: ignore
-from sklearn.pipeline import Pipeline # type: ignore
+from sklearn.model_selection import train_test_split
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import RobustScaler, FunctionTransformer
+from sklearn.pipeline import Pipeline 
 from sklearn.preprocessing import StandardScaler
 
 from src.constants import *
@@ -17,9 +17,9 @@ from dataclasses import dataclass
 @dataclass
 class DataTransformationConfig:
     artifacts_folder: str = os.path.join(artifact_folder)
-    transformed_train_file_path: str = os.path.join(artifact_dir, 'train.npy') # type: ignore
-    transformed_test_file_path: str = os.path.join(artifact_dir, 'test.npy') # type: ignore
-    transformed_object_file_path: str = os.path.join(artifact_dir, 'preprocessor.pkl') # type: ignore
+    transformed_train_file_path: str = os.path.join(artifact_folder, 'train.npy')
+    transformed_test_file_path: str = os.path.join(artifact_folder, 'test.npy')
+    transformed_object_file_path: str = os.path.join(artifact_folder, 'preprocessor.pkl')
     
 class DataTransformation:
     def __init__(self, feature_store_file_path):
@@ -32,13 +32,13 @@ class DataTransformation:
         try:
             df = pd.read_csv(feature_store_file_path)
 
-            data.rename(columns={"Good/Bad": TARGET_COLUMN}, inplace=True) # type: ignore
-
-            return data # type: ignore
+            df.rename(columns={"Good/Bad": TARGET_COLUMN}, inplace=True)
+            return df
         except Exception as e:
             raise CustomException(e, sys)
 
     def get_data_transformer_object(self):
+        # sourcery skip: inline-immediately-returned-variable
 
         try:
             imputer_step = ('imputer', SimpleImputer(strategy='constant', fill_value=0))
@@ -73,7 +73,7 @@ class DataTransformation:
             preprocessor_path = self.data_transformation_config.transformed_object_file_path
             os.makedirs(os.path.dirname(preprocessor_path), exist_ok=True)
 
-            save.utils.save_path(file_path = preprocessor_path, obj=preprocessor) # type: ignore
+            self.utils.save_path(file_path = preprocessor_path, obj=preprocessor)
 
             train_arr = np.c_[x_train_scaled, np.array(y_train)]
             test_arr = np.c_[x_test_scaled, np.array(y_test)]

@@ -13,27 +13,26 @@ class TrainingPipeline:
         # sourcery skip: inline-immediately-returned-variable
         try:
             data_ingestion = DataIngestion()
-            feature_store_file_path = data_ingestion.initiate_data_ingestion()
-            return feature_store_file_path
+            return data_ingestion.initiate_data_ingestion()
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def start_data_transformation(self, feature_store_file_path):
+        
         try:
             data_transformation = DataTransformation(feature_store_file_path = feature_store_file_path)
             train_array, test_array, preprocessor = data_transformation.initiate_data_transformation()
             return train_array, test_array, preprocessor
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
         
     def start_model_training(self, train_array, test_array):
         # sourcery skip: inline-immediately-returned-variable
         try:
             model_trainer = ModelTrainer()
-            model_score = model_trainer.initiate_model_trainer(train_array, test_array)
-            return model_score
+            return model_trainer.initiate_model_trainer(train_array, test_array)
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
 
     def run_pipeline(self):
         try:
@@ -44,4 +43,4 @@ class TrainingPipeline:
             print ("training completed. Trained model score is : ", r2_square)
             
         except Exception as e:
-            raise CustomException(e, sys)
+            raise CustomException(e, sys) from e
